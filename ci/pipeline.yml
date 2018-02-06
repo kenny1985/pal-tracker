@@ -1,0 +1,82 @@
+---
+resources:
+- name: pal-tracker
+  type: git
+  source:
+    uri: {{github-repository}}
+    branch: master
+    private_key: |
+        -----BEGIN RSA PRIVATE KEY-----
+        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
+        -----END RSA PRIVATE KEY-----
+
+- name: deploy
+  type: cf
+  source:
+    api: {{cf-api-url}}
+    username: {{cf-username}}
+    password: {{cf-password}}
+    organization: {{cf-org}}
+    space: {{cf-space}}
+
+jobs:
+- name: build-and-deploy
+  plan:
+  - get: pal-tracker
+    trigger: true
+  - task: build and test
+    file: pal-tracker/ci/build.yml
+  - put: deploy
+    params:
+      manifest: pal-tracker/manifest.yml
+      path: build-output/pal-tracker.jar
+      environment_variables:
+        WELCOME_MESSAGE: "Hello from Concourse"
