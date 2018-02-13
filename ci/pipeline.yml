@@ -9,6 +9,7 @@ resources:
 - name: pal-tracker-artifacts
   type: s3
   source:
+    region_name: {{aws-region}}
     bucket: {{aws-bucket}}
     regexp: releases/pal-tracker-(.*).jar
     access_key_id: {{aws-access-key-id}}
