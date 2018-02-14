@@ -23,9 +23,7 @@ run:
 
     apt-get update
 
-    dpkg -i mariadb-server-10.1
-
-    dpkg-reconfigure mariadb-server-10.1
+    apt-get install mariadb-server mariadb-client
 
     apt-get -y install mysql-server
     service mysql start
