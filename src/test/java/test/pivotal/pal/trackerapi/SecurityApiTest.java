@@ -1,6 +1,5 @@
 package test.pivotal.pal.trackerapi;
 
-import com.jayway.jsonpath.DocumentContext;
 import io.pivotal.pal.tracker.PalTrackerApplication;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,39 +13,40 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import static com.jayway.jsonpath.JsonPath.parse;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = PalTrackerApplication.class, webEnvironment = RANDOM_PORT)
-public class HealthApiTest {
+public class SecurityApiTest {
 
     @LocalServerPort
     private String port;
-    private TestRestTemplate restTemplate;
+    private TestRestTemplate authorizedRestTemplate;
+
+    @Autowired
+    private TestRestTemplate unAuthorizedRestTemplate;
 
     @Before
     public void setUp() throws Exception {
         RestTemplateBuilder builder = new RestTemplateBuilder()
-                .rootUri("http://localhost:" + port)
-                .basicAuthorization("user", "password");
+            .rootUri("http://localhost:" + port)
+            .basicAuthorization("user", "password");
 
-        restTemplate = new TestRestTemplate(builder);
+        authorizedRestTemplate = new TestRestTemplate(builder);
     }
 
+    @Test
+    public void unauthorizedTest() {
+        ResponseEntity<String> response = this.unAuthorizedRestTemplate.getForEntity("/", String.class);
+
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.UNAUTHORIZED);
+    }
 
     @Test
-    public void healthTest() {
-        ResponseEntity<String> response = this.restTemplate.getForEntity("/health", String.class);
-
+    public void authorizedTest() {
+        ResponseEntity<String> response = this.authorizedRestTemplate.getForEntity("/", String.class);
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-
-        DocumentContext healthJson = parse(response.getBody());
-
-        assertThat(healthJson.read("$.status", String.class)).isEqualTo("UP");
-        assertThat(healthJson.read("$.db.status", String.class)).isEqualTo("UP");
-        assertThat(healthJson.read("$.diskSpace.status", String.class)).isEqualTo("UP");
     }
 }
