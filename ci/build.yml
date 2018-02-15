@@ -19,20 +19,8 @@ run:
   - -exc
   - |
 
-    export DEBIAN_FRONTEND="noninteractive"
-
-    apt-get update
-
-    apt-get -y install mariadb-server-10.1
-    apt-get -y install mariadb-server mariadb-client
-
-    apt-get -y install mysql-server
-    service mysql start
-
     cd pal-tracker
-    mysql -uroot < databases/create_databases.sql
-    chmod +x gradlew
-    ./gradlew testMigrate clean build || (service mysql stop && exit 1)
-    service mysql stop
 
+    chmod +x gradlew
+    ./gradlew  clean build
     cp build/libs/pal-tracker-*.jar ../build-output
