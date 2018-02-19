@@ -20,18 +20,20 @@ run:
   - |
 
     export DEBIAN_FRONTEND="noninteractive"
-
+    echo "deb https://apt.dockerproject.org/repo ubuntu-xenial main" | sudo tee /etc/apt/sources.list.d/docker.list
+    apt-get update
+    
     deb [arch=amd64,i386] http://ftp.utexas.edu/mariadb/repo/10.1/debian jessie main
     deb [arch=amd64,i386] http://ftp.utexas.edu/mariadb/repo/10.1/debian jessie main
     deb-src http://ftp.utexas.edu/mariadb/repo/10.1/debian jessie main
-    apt-get update
+
 
     apt-get -y install python-software-properties
     apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 0xcbcb082a1bb943db
     apt-get -y  install software-properties-common
     apt-get -y install mariadb-server mariadb-client
 
-    
+
     apt-get -y install mysql-server
 
     service mysql start
