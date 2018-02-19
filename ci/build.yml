@@ -23,7 +23,10 @@ run:
 
     apt-get update
 
+    (DEBIAN_FRONTEND=noninteractive apt-get install -y mariadb-server || DEBIAN_FRONTEND=noninteractive apt-get install -y mariadb-server)
+
     apt-get -y install mysql-server
+
     service mysql start
 
     cd pal-tracker
