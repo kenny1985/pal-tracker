@@ -4,7 +4,7 @@ resources:
   type: git
   source:
     uri: {{github-repository}}
-    branch: master
+    branch: jdbc_template
     private_key: |
       -----BEGIN RSA PRIVATE KEY-----
       MIIJKgIBAAKCAgEA0M6l7+3JFrD5tMi/BebqOYvwWqa1yf9/jAwoUBMZ/OMrw4HB
