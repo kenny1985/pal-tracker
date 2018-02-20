@@ -21,6 +21,11 @@ run:
 
     export DEBIAN_FRONTEND="noninteractive"
 
+    sudo apt-get remove --purge mariadb-server mariadb-client
+    sudo apt-get autoremove
+    sudo apt-get autoclean
+    sudo apt-get install mariadb-server mariadb-client
+
     apt-get update
 
     apt-get -y install mysql-server
