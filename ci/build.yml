@@ -22,6 +22,7 @@ run:
     export DEBIAN_FRONTEND="noninteractive"
 
     apt-get update
+    apt-get install -y mariadb-server
 
     apt-get -y install mysql-server
     service mysql start
